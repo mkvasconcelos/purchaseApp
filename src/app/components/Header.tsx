@@ -9,7 +9,6 @@ import { NavContext } from '../contexts/NavContext';
 export default function Header() {
   const router = useRouter();
   const [current, setCurrent] = useState(false);
-  // const token = localStorage.getItem('token');
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const { navBar, setNavBar } = useContext(NavContext);
   return (

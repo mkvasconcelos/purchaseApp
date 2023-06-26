@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { ImExit } from 'react-icons/im';
 
 export default function Profile() {
-  // const name = localStorage.getItem('username');
   const name = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
-
   return (
     <Container>
       <Top>{name}</Top>

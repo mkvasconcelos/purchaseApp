@@ -4,12 +4,10 @@ import Purchase from '@/app/components/Purchase';
 import { readPurchase } from '@/app/services/api';
 import { PurchaseResumeDate } from '@/app/utils/interfaces';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Home } from '../layout';
 
 export default function HomePage() {
-  // const token = localStorage.getItem('token');
-  // const name = localStorage.getItem('username');
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const name = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   const router = useRouter();

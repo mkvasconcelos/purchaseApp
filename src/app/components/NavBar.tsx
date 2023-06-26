@@ -20,7 +20,6 @@ export default function NavBar() {
     font-size: 15px;
     padding-top: 10px;
   `;
-
   const Icon = styled.div`
     display: flex;
     flex-direction: column;
@@ -35,7 +34,6 @@ export default function NavBar() {
       text-align: center;
     }
   `;
-
   return (
     <Container>
       <Icon onClick={() => (window.location.href = '/pages/purchase')}>

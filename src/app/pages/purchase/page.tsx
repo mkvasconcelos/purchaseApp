@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 export default function Purchase() {
-  // const token = localStorage.getItem('token');
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const router = useRouter();
   const [loading, setLoading] = useState(true);

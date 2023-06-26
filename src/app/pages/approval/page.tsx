@@ -8,8 +8,6 @@ import { Home } from '../layout';
 import Approvals from '@/app/components/Approval';
 
 export default function Approval() {
-  // const token = localStorage.getItem('token');
-  // const name = localStorage.getItem('username');
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const name = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   const router = useRouter();

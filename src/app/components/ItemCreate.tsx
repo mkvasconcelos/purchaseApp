@@ -4,7 +4,6 @@ import styled from 'styled-components';
 export default function ItemCreate({ children }: { children: React.ReactNode }) {
   return <ContainerItemCreate>{children}</ContainerItemCreate>;
 }
-
 const ContainerItemCreate = styled.main`
   display: flex;
   align-items: center;
