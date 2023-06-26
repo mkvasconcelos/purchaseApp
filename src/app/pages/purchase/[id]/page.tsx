@@ -10,7 +10,8 @@ import { Button } from '../layout';
 import styled from 'styled-components';
 
 export default function Purchase() {
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [purchase, setPurchase] = useState<PurchaseData>();

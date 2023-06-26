@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 
 export default function SignupPage() {
-  const token = localStorage.getItem('token');
+  // const token = localStorage.getItem('token');
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const router = useRouter();
   if (token) {
     return router.push('/pages/home');

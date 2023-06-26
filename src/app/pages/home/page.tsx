@@ -8,8 +8,10 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Home } from '../layout';
 
 export default function HomePage() {
-  const token = localStorage.getItem('token');
-  const name = localStorage.getItem('username');
+  // const token = localStorage.getItem('token');
+  // const name = localStorage.getItem('username');
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const name = typeof window !== 'undefined' ? localStorage.getItem('username') : null;
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [listPurchase, setListPurchase] = useState<PurchaseResumeDate[]>([]);
