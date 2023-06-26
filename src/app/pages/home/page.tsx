@@ -1,52 +1,48 @@
 'use client';
-import Header from '@/app/components/Header';
 import Loading from '@/app/components/Loading';
 import Purchase from '@/app/components/Purchase';
-import { readAcessory, readPurchase } from '@/app/services/api';
+import { readPurchase } from '@/app/services/api';
 import { PurchaseResumeDate } from '@/app/utils/interfaces';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState, useContext } from 'react';
+import { Home } from '../layout';
 
 export default function HomePage() {
   const token = localStorage.getItem('token');
+  const name = localStorage.getItem('username');
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [listPurchase, setListPurchase] = useState<PurchaseResumeDate[]>([]);
   useEffect(() => {
     setLoading(false);
-    const resAccessory = readAcessory(token);
-    const resPurchase = readPurchase(token);
-    resAccessory.then((res) => {});
-    resAccessory.catch(() => {});
-    resPurchase.then((res) => {
+    const res = readPurchase(token);
+    res.then((res) => {
       setListPurchase(res);
-      setLoading(true);
     });
-    resPurchase.catch(() => {
-      setLoading(true);
-    });
+    setLoading(true);
   }, [token]);
   if (!token) {
-    return router.push('/pages/sign-in');
+    return router.push('/pages/auth/sign-in');
   }
   if (!loading) {
     return <Loading />;
   }
-
   return (
-    <Container>
-      <Header></Header>
+    <>
       <Home>
-        <div></div>
-        <Purchase
-          id={'ID'}
-          requester={'Requester'}
-          vendor={'Vendor'}
-          status={'Status'}
-          createdAt={'Created at'}
-          updatedAt={'Updated at'}
-        />
+        <div>Hi, {name}</div>
+        {listPurchase.length !== 0 ? (
+          <Purchase
+            id={'ID'}
+            requester={'Requester'}
+            vendor={'Vendor'}
+            status={'Status'}
+            createdAt={'Created'}
+            updatedAt={'Updated'}
+          />
+        ) : (
+          <div>You do not have any open requests yet.</div>
+        )}
         {listPurchase.length !== 0 &&
           listPurchase.map((p) => (
             <Purchase
@@ -60,21 +56,6 @@ export default function HomePage() {
             />
           ))}
       </Home>
-    </Container>
+    </>
   );
 }
-
-const Container = styled.div`
-  margin-top: 50px;
-  color: #656565;
-`;
-
-const Home = styled.div`
-  padding: 10px;
-  main:nth-child(2) {
-    font-size: 15px;
-    background-color: #92969a;
-    color: white;
-    cursor: default;
-  }
-`;

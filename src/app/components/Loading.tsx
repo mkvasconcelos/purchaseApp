@@ -5,7 +5,14 @@ import ReactLoading from 'react-loading';
 export default function Loading() {
   return (
     <LoadingStyled>
-      <ReactLoading type={'bars'} color={'white'} max-height={'50px'} height={'20%'} max-width={'50px'} width={'20%'} />
+      <ReactLoading
+        type={'bars'}
+        color={'#fc227a'}
+        max-height={'50px'}
+        height={'20%'}
+        max-width={'50px'}
+        width={'20%'}
+      />
     </LoadingStyled>
   );
 }

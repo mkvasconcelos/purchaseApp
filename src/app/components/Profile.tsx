@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
 import { ImExit } from 'react-icons/im';
 
 export default function Profile() {
-  const router = useRouter();
+  const name = localStorage.getItem('username');
   return (
     <Container>
-      {/* <Top>Mateus Kavamoto Vasconcelos</Top> */}
+      <Top>{name}</Top>
+      <br></br>
       <Bottom
         onClick={() => {
-          router.push('/pages/sign-in');
+          window.location.href = '/pages/auth/sign-in';
           localStorage.removeItem('token');
         }}
       >
@@ -53,5 +53,4 @@ const Top = styled.div`
 
 const Bottom = styled.div`
   display: flex;
-  /* margin: 10px 0 0 0; */
 `;

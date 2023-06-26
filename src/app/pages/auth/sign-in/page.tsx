@@ -1,11 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import Loading from '../../components/Loading';
-import { login } from '../../services/api';
+import Loading from '../../../components/Loading';
+import { getNameUser, login } from '../../../services/api';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import Header from '@/app/components/Header';
-import styled from 'styled-components';
+import Swal from 'sweetalert2';
 
 export default function SigninPage() {
   const token = localStorage.getItem('token');
@@ -25,13 +24,16 @@ export default function SigninPage() {
     };
     try {
       const response = await login(body);
+      const name = await getNameUser(response.token);
       localStorage.setItem('token', response.token);
+      localStorage.setItem('username', name);
       setLoading(true);
-      router.push('/pages/home');
-    } catch (error: any) {
-      if (error.response?.status === 401) {
-        alert('E-mail or password invalid!');
-      }
+      window.location.href = '/pages/home';
+    } catch (error) {
+      Swal.fire({
+        title: 'E-mail or password invalid!',
+        icon: 'error',
+      });
     }
     setLoading(true);
   };
@@ -39,41 +41,25 @@ export default function SigninPage() {
     return <Loading />;
   }
   return (
-    <Container>
-      <Header />
-      <div>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input type="email" placeholder="e-mail" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          ></input>
-          <button type="submit" disabled={!loading}>
-            Sign In
-          </button>
-        </form>
-        <Link href="/pages/sign-up">First time? Create an account!</Link>
-      </div>
-    </Container>
+    <>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        ></input>
+        <button type="submit" disabled={!loading}>
+          Sign In
+        </button>
+      </form>
+      <footer>
+        <Link href="/pages/auth/sign-up">First time? Create an account!</Link>
+      </footer>
+    </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  justify-content: space-between;
-  margin-top: 50px;
-  background-color: #151515;
-  color: #ffff;
-  /* font-family: 'Passion One', cursive; */
-  /* @media (max-width: 900px) {
-    flex-direction: column;
-    align-items: center;
-  } */
-`;
 
 // const LogoContainer = styled.div`
 //   display: flex;
