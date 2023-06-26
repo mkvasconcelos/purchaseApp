@@ -23,7 +23,7 @@ interface CreatePurchaseData {
   listItems: { typeId: string; ccId: string; kcId: string; quantity: number; priceUnit: number }[];
 }
 
-const API_URL = 'http://127.0.0.1:4000';
+const API_URL = process.env.API_URL;
 
 export const login = async (data: LoginData): Promise<{ token: string }> => {
   try {
