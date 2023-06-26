@@ -40,7 +40,7 @@ export default function Purchase() {
       setLoading(true);
       return router.push('/pages/home');
     });
-  }, [token, disabled]);
+  }, [token, disabled, router]);
   const handleApproval = async (status: boolean) => {
     setLoading(false);
     const pathname = window.location.pathname;

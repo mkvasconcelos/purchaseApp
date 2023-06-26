@@ -189,7 +189,7 @@ export default function Purchase() {
             </div>
           </ItemCreate>
           {itemList.map((item, index) => (
-            <ItemCreate>
+            <ItemCreate key={index}>
               <div>
                 <select value={item.ccId} onChange={(e) => handleChange(e, index, 'ccId')}>
                   <option value=""></option>

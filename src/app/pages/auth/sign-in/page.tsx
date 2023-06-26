@@ -9,12 +9,12 @@ import Swal from 'sweetalert2';
 export default function SigninPage() {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const router = useRouter();
-  if (token) {
-    return router.push('/pages/home');
-  }
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(true);
+  if (token) {
+    return router.push('/pages/home');
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(false);

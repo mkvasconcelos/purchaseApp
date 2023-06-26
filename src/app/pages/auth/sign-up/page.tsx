@@ -9,14 +9,14 @@ import Swal from 'sweetalert2';
 export default function SignupPage() {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const router = useRouter();
-  if (token) {
-    return router.push('/pages/home');
-  }
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(true);
+  if (token) {
+    return router.push('/pages/home');
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(false);
